@@ -13,7 +13,7 @@ class SPBJiraManager {
     
     static let shared = SPBJiraManager.defaultManager()
     
-    let session: JiraSession
+    let manager: JiraManager
     
     var issues: [JIRAIssue]?
     
@@ -27,37 +27,13 @@ class SPBJiraManager {
     }
     
     init(configuation: JiraSessionConfiguration) {
-        session = JiraSession(configuration: configuation)
-    }
-    
-    func fetchIssues(completionHandler: @escaping ([JIRAIssue]) -> ()) {
-        if let issues = issues {
-            print(issues)
-            completionHandler(issues)
-            return
-        }
-        
-        session.fetchIssues { (issues) in
-            let sortedIssues = issues.sorted(by: { (issueA, issueB) -> Bool in
-                return issueA.key.compare(issueB.key) == .orderedAscending
-            })
-            self.issues = sortedIssues
-            completionHandler(sortedIssues)
-        }
+        self.manager = JiraManager(configuration: configuation)
     }
     
     func findMatchingIssues(for query: String, completionHandler: @escaping ([JIRAIssue]) -> ()) {
-        fetchIssues { (issues) in
-            let filteredIssues = self.filter(query: query, issues: issues)
-            completionHandler(filteredIssues)
+        self.manager.queryIssues(userQueryString: query) {
+            (issues) in
+            completionHandler(issues)
         }
     }
-    
-    func filter(query: String, issues: [JIRAIssue]) -> [JIRAIssue] {
-        return issues.filter { (issue) -> Bool in
-            let issueKey = issue.key
-            return issueKey.lowercased().starts(with: query.lowercased()) || issueKey.lowercased() == query.lowercased() || issueKey.contains(query)
-        }
-    }
-    
 }

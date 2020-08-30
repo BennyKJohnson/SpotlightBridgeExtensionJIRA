@@ -8,8 +8,15 @@
 
 import Foundation
 
-struct JiraIssueCollection: Decodable {
+struct JiraIssueQueryResponse: Decodable {
     let total: Int
     let startAt: Int
+    let maxResults: Int
     let issues: [JIRAIssue]
+    
+    var hasPendingResults: Bool {
+        get {
+               return self.startAt + self.maxResults < self.total
+        }
+    }
 }

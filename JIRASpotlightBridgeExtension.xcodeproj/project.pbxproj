@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F16997324FB098600446CB9 /* JiraUserIssueQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16997224FB098600446CB9 /* JiraUserIssueQueryRequest.swift */; };
+		6F16997524FB0F6D00446CB9 /* JiraUserIssueQueryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16997424FB0F6D00446CB9 /* JiraUserIssueQueryRequestTests.swift */; };
+		6F16997824FB138F00446CB9 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16997724FB138F00446CB9 /* APIRequest.swift */; };
+		6F16997B24FB27D800446CB9 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F16997A24FB27D800446CB9 /* LICENSE.txt */; };
+		6F16997D24FB28C300446CB9 /* JiraUserIssueQueryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16997C24FB28C300446CB9 /* JiraUserIssueQueryTask.swift */; };
+		6F325BCE24F5B2CC0064EF66 /* JiraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F325BCD24F5B2CC0064EF66 /* JiraManager.swift */; };
 		6F6B167F24E4FC020041B8EF /* SPBJIRAQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B167E24E4FC020041B8EF /* SPBJIRAQuery.swift */; };
 		6F6B168624E4FCBA0041B8EF /* JIRASpotlightBridgeExtension.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F6B167424E4FB8E0041B8EF /* JIRASpotlightBridgeExtension.bundle */; };
 		6F6B168A24E5094F0041B8EF /* SPBJIRAResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B168924E5094F0041B8EF /* SPBJIRAResult.swift */; };
@@ -14,6 +20,29 @@
 		6F6B169124E51BA10041B8EF /* JIRAIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B168F24E51BA10041B8EF /* JIRAIssueViewController.swift */; };
 		6F6B169224E51BA10041B8EF /* JIRAIssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B169024E51BA10041B8EF /* JIRAIssueViewController.xib */; };
 		6F6B169424E51C890041B8EF /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B169324E51C890041B8EF /* BundleExtension.swift */; };
+		6F794E2B24F85260000411A9 /* JiraStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F794E2A24F85260000411A9 /* JiraStoreTests.swift */; };
+		6F794E2C24F8526A000411A9 /* JiraModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A8A3D24F39BAC00BEEFE6 /* JiraModel.xcdatamodeld */; };
+		6F86FFCC24F459E900AFE576 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86FFCB24F459E900AFE576 /* CoreDataManager.swift */; };
+		6F86FFD024F45BF400AFE576 /* JiraStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86FFCF24F45BF400AFE576 /* JiraStore.swift */; };
+		6F86FFD224F45D0300AFE576 /* ManagedObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86FFD124F45D0300AFE576 /* ManagedObjectConvertible.swift */; };
+		6F96ED9324F519D50032F956 /* JiraIssueManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F96ED8D24F519BC0032F956 /* JiraIssueManagedObject+CoreDataClass.swift */; };
+		6F96ED9424F519D50032F956 /* JiraIssueManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F96ED8E24F519BC0032F956 /* JiraIssueManagedObject+CoreDataProperties.swift */; };
+		6FAFEB8424F7B4D4000EAAC3 /* JiraModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A8A3D24F39BAC00BEEFE6 /* JiraModel.xcdatamodeld */; };
+		6FD2203624FA3429008DCEEC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2203424FA3429008DCEEC /* String+Extension.swift */; };
+		6FD2203724FA3429008DCEEC /* StringMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2203524FA3429008DCEEC /* StringMetric.swift */; };
+		6FD2203F24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2203E24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.swift */; };
+		6FD2204524FA54B5008DCEEC /* SPBJIRAQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2204424FA54B5008DCEEC /* SPBJIRAQueryTests.swift */; };
+		6FD2204624FA54C1008DCEEC /* SPBJIRAQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B167E24E4FC020041B8EF /* SPBJIRAQuery.swift */; };
+		6FD2204724FA5618008DCEEC /* SpotlightBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF7C53924F1C30500C471AD /* SpotlightBridge.framework */; };
+		6FD2204824FA5669008DCEEC /* JIRAServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF7C54224F1CD3F00C471AD /* JIRAServices.framework */; };
+		6FD2204924FA5717008DCEEC /* SPBJIRAResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B168924E5094F0041B8EF /* SPBJIRAResult.swift */; };
+		6FD2204A24FA571E008DCEEC /* JIRAIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B168F24E51BA10041B8EF /* JIRAIssueViewController.swift */; };
+		6FD2204B24FA5722008DCEEC /* SPBJiraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C5AC24F20E6100C471AD /* SPBJiraManager.swift */; };
+		6FD2204C24FA5738008DCEEC /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B169324E51C890041B8EF /* BundleExtension.swift */; };
+		6FD2204D24FA5747008DCEEC /* StringMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2203524FA3429008DCEEC /* StringMetric.swift */; };
+		6FD2205024FA580E008DCEEC /* SpotlightBridge.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FF7C53924F1C30500C471AD /* SpotlightBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FD2205424FA6D0C008DCEEC /* JiraIssueQueryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2205324FA6D0C008DCEEC /* JiraIssueQueryResponse.json */; };
+		6FD2205624FA6E0C008DCEEC /* JiraIssueQueryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2205324FA6D0C008DCEEC /* JiraIssueQueryResponse.json */; };
 		6FF7C53A24F1C30500C471AD /* SpotlightBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF7C53924F1C30500C471AD /* SpotlightBridge.framework */; };
 		6FF7C54B24F1CD3F00C471AD /* JIRAServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF7C54224F1CD3F00C471AD /* JIRAServices.framework */; };
 		6FF7C55224F1CD3F00C471AD /* JIRAServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF7C54424F1CD3F00C471AD /* JIRAServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,7 +53,7 @@
 		6FF7C55F24F1D1ED00C471AD /* JiraSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C55E24F1D1ED00C471AD /* JiraSessionConfiguration.swift */; };
 		6FF7C56124F1D2BD00C471AD /* JiraSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C56024F1D2BD00C471AD /* JiraSessionTests.swift */; };
 		6FF7C56324F1D60800C471AD /* JiraSessionConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C56224F1D60800C471AD /* JiraSessionConfigurationTests.swift */; };
-		6FF7C5AB24F20C5900C471AD /* JiraIssueCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C5AA24F20C5900C471AD /* JiraIssueCollection.swift */; };
+		6FF7C5AB24F20C5900C471AD /* JiraIssueQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C5AA24F20C5900C471AD /* JiraIssueQueryResponse.swift */; };
 		6FF7C5AD24F20E6100C471AD /* SPBJiraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF7C5AC24F20E6100C471AD /* SPBJiraManager.swift */; };
 		6FF7C5AF24F227FD00C471AD /* jiraconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7C5AE24F227FD00C471AD /* jiraconfig.json */; };
 /* End PBXBuildFile section */
@@ -50,6 +79,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FD2204F24FA5805008DCEEC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6FD2205024FA580E008DCEEC /* SpotlightBridge.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FF7C55C24F1D04700C471AD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,6 +102,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F16997224FB098600446CB9 /* JiraUserIssueQueryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraUserIssueQueryRequest.swift; sourceTree = "<group>"; };
+		6F16997424FB0F6D00446CB9 /* JiraUserIssueQueryRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraUserIssueQueryRequestTests.swift; sourceTree = "<group>"; };
+		6F16997724FB138F00446CB9 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		6F16997A24FB27D800446CB9 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		6F16997C24FB28C300446CB9 /* JiraUserIssueQueryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraUserIssueQueryTask.swift; sourceTree = "<group>"; };
+		6F325BCD24F5B2CC0064EF66 /* JiraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraManager.swift; sourceTree = "<group>"; };
+		6F4A8A3E24F39BAC00BEEFE6 /* JiraModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JiraModel.xcdatamodel; sourceTree = "<group>"; };
 		6F6B167424E4FB8E0041B8EF /* JIRASpotlightBridgeExtension.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JIRASpotlightBridgeExtension.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F6B167724E4FB8E0041B8EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F6B167E24E4FC020041B8EF /* SPBJIRAQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPBJIRAQuery.swift; sourceTree = "<group>"; };
@@ -72,6 +118,19 @@
 		6F6B168F24E51BA10041B8EF /* JIRAIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JIRAIssueViewController.swift; sourceTree = "<group>"; };
 		6F6B169024E51BA10041B8EF /* JIRAIssueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JIRAIssueViewController.xib; sourceTree = "<group>"; };
 		6F6B169324E51C890041B8EF /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		6F794E2A24F85260000411A9 /* JiraStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraStoreTests.swift; sourceTree = "<group>"; };
+		6F86FFCB24F459E900AFE576 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6F86FFCF24F45BF400AFE576 /* JiraStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraStore.swift; sourceTree = "<group>"; };
+		6F86FFD124F45D0300AFE576 /* ManagedObjectConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectConvertible.swift; sourceTree = "<group>"; };
+		6F96ED8D24F519BC0032F956 /* JiraIssueManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JiraIssueManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6F96ED8E24F519BC0032F956 /* JiraIssueManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JiraIssueManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6FD2203424FA3429008DCEEC /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		6FD2203524FA3429008DCEEC /* StringMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringMetric.swift; sourceTree = "<group>"; };
+		6FD2203C24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JIRASpotlightBridgeExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FD2203E24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JIRASpotlightBridgeExtensionTests.swift; sourceTree = "<group>"; };
+		6FD2204024FA547E008DCEEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FD2204424FA54B5008DCEEC /* SPBJIRAQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPBJIRAQueryTests.swift; sourceTree = "<group>"; };
+		6FD2205324FA6D0C008DCEEC /* JiraIssueQueryResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JiraIssueQueryResponse.json; sourceTree = "<group>"; };
 		6FF7C53724F1C2F100C471AD /* Spotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spotlight.framework; path = ../../../../System/Library/PrivateFrameworks/Spotlight.framework; sourceTree = "<group>"; };
 		6FF7C53924F1C30500C471AD /* SpotlightBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotlightBridge.framework; path = "../../Library/Developer/Xcode/DerivedData/SpotlightBridge-ejtgnhqiidiihgdhizfcemwfkohf/Build/Products/Debug/SpotlightBridge.framework"; sourceTree = "<group>"; };
 		6FF7C53B24F1CC8300C471AD /* JiraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSession.swift; sourceTree = "<group>"; };
@@ -83,7 +142,7 @@
 		6FF7C55E24F1D1ED00C471AD /* JiraSessionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSessionConfiguration.swift; sourceTree = "<group>"; };
 		6FF7C56024F1D2BD00C471AD /* JiraSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSessionTests.swift; sourceTree = "<group>"; };
 		6FF7C56224F1D60800C471AD /* JiraSessionConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSessionConfigurationTests.swift; sourceTree = "<group>"; };
-		6FF7C5AA24F20C5900C471AD /* JiraIssueCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraIssueCollection.swift; sourceTree = "<group>"; };
+		6FF7C5AA24F20C5900C471AD /* JiraIssueQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraIssueQueryResponse.swift; sourceTree = "<group>"; };
 		6FF7C5AC24F20E6100C471AD /* SPBJiraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPBJiraManager.swift; sourceTree = "<group>"; };
 		6FF7C5AE24F227FD00C471AD /* jiraconfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = jiraconfig.json; path = JIRASpotlightBridgeExtension/jiraconfig.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +154,15 @@
 			files = (
 				6FF7C55B24F1CDB300C471AD /* JIRAServices.framework in Frameworks */,
 				6FF7C53A24F1C30500C471AD /* SpotlightBridge.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FD2203924FA547E008DCEEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FD2204824FA5669008DCEEC /* JIRAServices.framework in Frameworks */,
+				6FD2204724FA5618008DCEEC /* SpotlightBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +184,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F16997924FB279F00446CB9 /* StringMetric */ = {
+			isa = PBXGroup;
+			children = (
+				6F16997A24FB27D800446CB9 /* LICENSE.txt */,
+				6FD2203424FA3429008DCEEC /* String+Extension.swift */,
+				6FD2203524FA3429008DCEEC /* StringMetric.swift */,
+			);
+			path = StringMetric;
+			sourceTree = "<group>";
+		};
 		6F6B166B24E4FB8E0041B8EF = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +201,7 @@
 				6F6B167624E4FB8E0041B8EF /* JIRASpotlightBridgeExtension */,
 				6FF7C54324F1CD3F00C471AD /* JIRAServices */,
 				6FF7C54E24F1CD3F00C471AD /* JIRAServicesTests */,
+				6FD2203D24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests */,
 				6F6B167524E4FB8E0041B8EF /* Products */,
 				6F6B168024E4FC970041B8EF /* Frameworks */,
 			);
@@ -134,6 +213,7 @@
 				6F6B167424E4FB8E0041B8EF /* JIRASpotlightBridgeExtension.bundle */,
 				6FF7C54224F1CD3F00C471AD /* JIRAServices.framework */,
 				6FF7C54A24F1CD3F00C471AD /* JIRAServicesTests.xctest */,
+				6FD2203C24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +221,7 @@
 		6F6B167624E4FB8E0041B8EF /* JIRASpotlightBridgeExtension */ = {
 			isa = PBXGroup;
 			children = (
+				6F16997924FB279F00446CB9 /* StringMetric */,
 				6F6B168B24E510460041B8EF /* favicon.png */,
 				6F6B167724E4FB8E0041B8EF /* Info.plist */,
 				6F6B167E24E4FC020041B8EF /* SPBJIRAQuery.swift */,
@@ -162,15 +243,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6FD2203D24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests */ = {
+			isa = PBXGroup;
+			children = (
+				6FD2203E24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.swift */,
+				6FD2204024FA547E008DCEEC /* Info.plist */,
+				6FD2204424FA54B5008DCEEC /* SPBJIRAQueryTests.swift */,
+			);
+			path = JIRASpotlightBridgeExtensionTests;
+			sourceTree = "<group>";
+		};
 		6FF7C54324F1CD3F00C471AD /* JIRAServices */ = {
 			isa = PBXGroup;
 			children = (
+				6F325BCD24F5B2CC0064EF66 /* JiraManager.swift */,
+				6F96ED8D24F519BC0032F956 /* JiraIssueManagedObject+CoreDataClass.swift */,
+				6F96ED8E24F519BC0032F956 /* JiraIssueManagedObject+CoreDataProperties.swift */,
+				6F4A8A3D24F39BAC00BEEFE6 /* JiraModel.xcdatamodeld */,
 				6F6B168D24E519830041B8EF /* JiraIssue.swift */,
 				6FF7C53B24F1CC8300C471AD /* JiraSession.swift */,
 				6FF7C54424F1CD3F00C471AD /* JIRAServices.h */,
 				6FF7C54524F1CD3F00C471AD /* Info.plist */,
 				6FF7C55E24F1D1ED00C471AD /* JiraSessionConfiguration.swift */,
-				6FF7C5AA24F20C5900C471AD /* JiraIssueCollection.swift */,
+				6FF7C5AA24F20C5900C471AD /* JiraIssueQueryResponse.swift */,
+				6F86FFCB24F459E900AFE576 /* CoreDataManager.swift */,
+				6F86FFCF24F45BF400AFE576 /* JiraStore.swift */,
+				6F86FFD124F45D0300AFE576 /* ManagedObjectConvertible.swift */,
+				6F16997224FB098600446CB9 /* JiraUserIssueQueryRequest.swift */,
+				6F16997724FB138F00446CB9 /* APIRequest.swift */,
+				6F16997C24FB28C300446CB9 /* JiraUserIssueQueryTask.swift */,
 			);
 			path = JIRAServices;
 			sourceTree = "<group>";
@@ -181,6 +282,9 @@
 				6FF7C55124F1CD3F00C471AD /* Info.plist */,
 				6FF7C56024F1D2BD00C471AD /* JiraSessionTests.swift */,
 				6FF7C56224F1D60800C471AD /* JiraSessionConfigurationTests.swift */,
+				6F794E2A24F85260000411A9 /* JiraStoreTests.swift */,
+				6FD2205324FA6D0C008DCEEC /* JiraIssueQueryResponse.json */,
+				6F16997424FB0F6D00446CB9 /* JiraUserIssueQueryRequestTests.swift */,
 			);
 			path = JIRAServicesTests;
 			sourceTree = "<group>";
@@ -217,6 +321,24 @@
 			productName = JIRASpotlightBridgeExtension;
 			productReference = 6F6B167424E4FB8E0041B8EF /* JIRASpotlightBridgeExtension.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		6FD2203B24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FD2204124FA547E008DCEEC /* Build configuration list for PBXNativeTarget "JIRASpotlightBridgeExtensionTests" */;
+			buildPhases = (
+				6FD2203824FA547E008DCEEC /* Sources */,
+				6FD2203924FA547E008DCEEC /* Frameworks */,
+				6FD2203A24FA547E008DCEEC /* Resources */,
+				6FD2204F24FA5805008DCEEC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JIRASpotlightBridgeExtensionTests;
+			productName = JIRASpotlightBridgeExtensionTests;
+			productReference = 6FD2203C24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6FF7C54124F1CD3F00C471AD /* JIRAServices */ = {
 			isa = PBXNativeTarget;
@@ -268,6 +390,9 @@
 						CreatedOnToolsVersion = 11.6;
 						LastSwiftMigration = 1160;
 					};
+					6FD2203B24FA547E008DCEEC = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					6FF7C54124F1CD3F00C471AD = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
@@ -292,6 +417,7 @@
 				6F6B167324E4FB8E0041B8EF /* JIRASpotlightBridgeExtension */,
 				6FF7C54124F1CD3F00C471AD /* JIRAServices */,
 				6FF7C54924F1CD3F00C471AD /* JIRAServicesTests */,
+				6FD2203B24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,9 +427,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F16997B24FB27D800446CB9 /* LICENSE.txt in Resources */,
 				6F6B169224E51BA10041B8EF /* JIRAIssueViewController.xib in Resources */,
 				6F6B168C24E510460041B8EF /* favicon.png in Resources */,
 				6FF7C5AF24F227FD00C471AD /* jiraconfig.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FD2203A24FA547E008DCEEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FD2205624FA6E0C008DCEEC /* JiraIssueQueryResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD2205424FA6D0C008DCEEC /* JiraIssueQueryResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,11 +464,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD2203724FA3429008DCEEC /* StringMetric.swift in Sources */,
 				6F6B169424E51C890041B8EF /* BundleExtension.swift in Sources */,
 				6F6B168A24E5094F0041B8EF /* SPBJIRAResult.swift in Sources */,
 				6FF7C5AD24F20E6100C471AD /* SPBJiraManager.swift in Sources */,
 				6F6B169124E51BA10041B8EF /* JIRAIssueViewController.swift in Sources */,
+				6FD2203624FA3429008DCEEC /* String+Extension.swift in Sources */,
 				6F6B167F24E4FC020041B8EF /* SPBJIRAQuery.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FD2203824FA547E008DCEEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FD2204D24FA5747008DCEEC /* StringMetric.swift in Sources */,
+				6FD2204924FA5717008DCEEC /* SPBJIRAResult.swift in Sources */,
+				6FD2204624FA54C1008DCEEC /* SPBJIRAQuery.swift in Sources */,
+				6FD2204A24FA571E008DCEEC /* JIRAIssueViewController.swift in Sources */,
+				6FD2204C24FA5738008DCEEC /* BundleExtension.swift in Sources */,
+				6FD2204B24FA5722008DCEEC /* SPBJiraManager.swift in Sources */,
+				6FD2204524FA54B5008DCEEC /* SPBJIRAQueryTests.swift in Sources */,
+				6FD2203F24FA547E008DCEEC /* JIRASpotlightBridgeExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,9 +494,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FF7C55F24F1D1ED00C471AD /* JiraSessionConfiguration.swift in Sources */,
+				6F96ED9324F519D50032F956 /* JiraIssueManagedObject+CoreDataClass.swift in Sources */,
+				6F16997824FB138F00446CB9 /* APIRequest.swift in Sources */,
+				6FAFEB8424F7B4D4000EAAC3 /* JiraModel.xcdatamodeld in Sources */,
+				6F96ED9424F519D50032F956 /* JiraIssueManagedObject+CoreDataProperties.swift in Sources */,
 				6FF7C55924F1CD5E00C471AD /* JiraSession.swift in Sources */,
+				6F16997D24FB28C300446CB9 /* JiraUserIssueQueryTask.swift in Sources */,
+				6F86FFD224F45D0300AFE576 /* ManagedObjectConvertible.swift in Sources */,
 				6FF7C55A24F1CD6500C471AD /* JiraIssue.swift in Sources */,
-				6FF7C5AB24F20C5900C471AD /* JiraIssueCollection.swift in Sources */,
+				6F16997324FB098600446CB9 /* JiraUserIssueQueryRequest.swift in Sources */,
+				6F86FFCC24F459E900AFE576 /* CoreDataManager.swift in Sources */,
+				6F325BCE24F5B2CC0064EF66 /* JiraManager.swift in Sources */,
+				6F86FFD024F45BF400AFE576 /* JiraStore.swift in Sources */,
+				6FF7C5AB24F20C5900C471AD /* JiraIssueQueryResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,8 +514,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F16997524FB0F6D00446CB9 /* JiraUserIssueQueryRequestTests.swift in Sources */,
 				6FF7C56124F1D2BD00C471AD /* JiraSessionTests.swift in Sources */,
+				6F794E2C24F8526A000411A9 /* JiraModel.xcdatamodeld in Sources */,
 				6FF7C56324F1D60800C471AD /* JiraSessionConfigurationTests.swift in Sources */,
+				6F794E2B24F85260000411A9 /* JiraStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +699,52 @@
 			};
 			name = Release;
 		};
+		6FD2204224FA547E008DCEEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8X8G29CCGH;
+				FRAMEWORK_SEARCH_PATHS = "/Users/benjaminjohnson/Library/Developer/Xcode/DerivedData/SpotlightBridge-ejtgnhqiidiihgdhizfcemwfkohf/Build/Products/Debug";
+				INFOPLIST_FILE = JIRASpotlightBridgeExtensionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = benjaminjohnson.JIRASpotlightBridgeExtensionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6FD2204324FA547E008DCEEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8X8G29CCGH;
+				FRAMEWORK_SEARCH_PATHS = "/Users/benjaminjohnson/Library/Developer/Xcode/DerivedData/SpotlightBridge-ejtgnhqiidiihgdhizfcemwfkohf/Build/Products/Debug";
+				INFOPLIST_FILE = JIRASpotlightBridgeExtensionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = benjaminjohnson.JIRASpotlightBridgeExtensionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		6FF7C55424F1CD3F00C471AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -664,6 +876,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		6FD2204124FA547E008DCEEC /* Build configuration list for PBXNativeTarget "JIRASpotlightBridgeExtensionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FD2204224FA547E008DCEEC /* Debug */,
+				6FD2204324FA547E008DCEEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6FF7C55324F1CD3F00C471AD /* Build configuration list for PBXNativeTarget "JIRAServices" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -683,6 +904,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6F4A8A3D24F39BAC00BEEFE6 /* JiraModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6F4A8A3E24F39BAC00BEEFE6 /* JiraModel.xcdatamodel */,
+			);
+			currentVersion = 6F4A8A3E24F39BAC00BEEFE6 /* JiraModel.xcdatamodel */;
+			path = JiraModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6F6B166C24E4FB8E0041B8EF /* Project object */;
 }

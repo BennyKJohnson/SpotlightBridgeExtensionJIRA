@@ -10,6 +10,14 @@ import XCTest
 @testable import JIRAServices
 
 class JiraSessionTests: XCTestCase {
+    var testConfiguration: JiraSessionConfiguration!
+    var session: JiraSession!
+    
+    override func setUp() {
+        let siteURL = URL(string: "http://test.jira.com")!
+        testConfiguration = JiraSessionConfiguration(siteURL: siteURL, username: "username", password: "password")
+        session = JiraSession(configuration: testConfiguration)
+    }
     
     func testInit() {
         let siteURL = URL(string: "test.com")!
@@ -43,5 +51,4 @@ class JiraSessionTests: XCTestCase {
         let decodedAuthentication = String(data: decodedData, encoding: .utf8)
         XCTAssertEqual(decodedAuthentication, "username:password")
     }
-
 }

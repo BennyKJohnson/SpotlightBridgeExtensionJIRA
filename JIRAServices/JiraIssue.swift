@@ -6,15 +6,42 @@
 //  Copyright © 2020 Benjamin Johnson. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
-public struct JIRAIssue: Decodable {
+public struct JIRAIssue: ObjectConvertible {
     public let key: String
     public let title: String
     public let description: String?
     public let timeSpent: TimeInterval?
     public let domain: String?
     
+    private(set) var identifier: String?
+    
+    public var issueID: String {
+        get {
+            return key.components(separatedBy: "-")[1]
+        }
+    }
+    
+    public init(key: String, title: String, description: String?, timeSpent: TimeInterval?) {
+        self.key = key
+        self.title = title
+        self.description = description
+        self.timeSpent = timeSpent
+        self.domain = nil
+    }
+    
+    public init(identifier: String, key: String, title: String, description: String?, timeSpent: TimeInterval?) {
+        self.identifier = identifier
+        self.key = key
+        self.title = title
+        self.description = description
+        self.timeSpent = timeSpent
+        self.domain = nil
+    }
+}
+
+extension JIRAIssue: Decodable {
     enum CodingKeys: String, CodingKey {
         case title = "summary"
         case key = "key"
@@ -36,13 +63,5 @@ public struct JIRAIssue: Decodable {
         timeSpent = try fields.decodeIfPresent(TimeInterval.self, forKey: .timeSpent)
         
         description = nil
-    }
-    
-    public init(key: String, title: String, description: String?, loggedTime: String?) {
-        self.key = key
-        self.title = title
-        self.description = description
-        self.timeSpent = nil
-        self.domain = nil
     }
 }

@@ -8,12 +8,24 @@
 
 import Foundation
 
-public struct JiraSessionConfiguration: Equatable, Codable {
+public struct JiraSessionConfiguration: Equatable {
     let siteURL: URL
     let username: String
     let password: String
     let apiVersion: String = "3"
     
+    public static func fromFile(for url: URL) -> JiraSessionConfiguration? {
+        guard let jsonData = try? Data(contentsOf: url) else {
+            return nil
+        }
+
+        let decoder = JSONDecoder()
+        let configuration = try? decoder.decode(JiraSessionConfiguration.self, from: jsonData)
+        return configuration
+    }
+}
+
+extension JiraSessionConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case siteURL = "domain"
         case username
@@ -25,15 +37,5 @@ public struct JiraSessionConfiguration: Equatable, Codable {
         self.siteURL = try root.decode(URL.self, forKey: .siteURL)
         self.username = try root.decode(String.self, forKey: .username)
         self.password = try root.decode(String.self, forKey: .password)
-    }
-    
-    public static func fromFile(for url: URL) -> JiraSessionConfiguration? {
-        guard let jsonData = try? Data(contentsOf: url) else {
-            return nil
-        }
-
-        let decoder = JSONDecoder()
-        let configuration = try? decoder.decode(JiraSessionConfiguration.self, from: jsonData)
-        return configuration
     }
 }

@@ -9,13 +9,18 @@
 import Foundation
 
 public class JiraSession: NSObject {
+    
     let configuration: JiraSessionConfiguration
+    
     let urlSession: URLSession
+    
+    let userIssueQueryRequest: JiraUserIssueQueryRequest
     
     public init(configuration: JiraSessionConfiguration) {
         self.configuration = configuration
         let urlSessionConfigration = JiraSession.urlSessionConfiguration(for: configuration)
         self.urlSession = URLSession(configuration: urlSessionConfigration)
+        userIssueQueryRequest = JiraUserIssueQueryRequest()
     }
     
     class func urlSessionConfiguration(for configuration: JiraSessionConfiguration) -> URLSessionConfiguration {
@@ -27,29 +32,20 @@ public class JiraSession: NSObject {
         return urlSessionConfiguration
     }
     
-    public func fetchIssues(completionHandler: @escaping (_ issues: [JIRAIssue]) -> ()) {
-        var urlCompounts = URLComponents(url: url(withPath: "search"), resolvingAgainstBaseURL: false)!
-        urlCompounts.queryItems = [
-            URLQueryItem(name: "jql", value: "assignee=currentUser()")
-        ]
-        
-        let task = urlSession.dataTask(with: urlCompounts.url!) { (data, response, error) in
-            guard let data = data else {
-                return
-            }
-            
-            let decoder = JSONDecoder()
-            let issueCollection = try! decoder.decode(JiraIssueCollection.self, from: data)
-            completionHandler(issueCollection.issues)
-        }
-        
-        task.resume()
+    public func fetchIssues(completionHandler: @escaping ((Result<[JIRAIssue], Error>) -> ())) {
+        let userIssueQueryTask = JiraUserIssueQueryTask(urlSession: self.urlSession, baseURL: baseURL)
+        userIssueQueryTask.fetchIssues(completionHandler: completionHandler)
     }
-    
+
+    var baseURL: URL {
+        get {
+            return configuration.siteURL
+                .appendingPathComponent("/rest/api")
+                .appendingPathComponent(configuration.apiVersion)
+        }
+    }
+
     func url(withPath path: String) -> URL {
-        return configuration.siteURL
-            .appendingPathComponent("/rest/api")
-            .appendingPathComponent(configuration.apiVersion)
-            .appendingPathComponent(path)
+        return baseURL.appendingPathComponent(path)
     }
 }
