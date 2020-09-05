@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+import JiraKit
 
 public class JiraStore {
     
@@ -73,12 +75,56 @@ public class JiraStore {
         })
     }
     
-    public func createOrUpdate(issue: JIRAIssue)
-    {
-        if let existingIssue = findIssue(key: issue.key) {
-            JiraIssueManagedObject.replace(issue, identifier: existingIssue.identifier!, with: context)
+    public func createOrUpdate(issues: [JIRAIssue]) {
+        do {
+            try deleteExisting(issues: issues)
+        } catch {
+            print(error)
+        }
+
+        for issue in issues {
+            self.insert(issue)
+        }
+        
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print("Error: \(error) could not save core data context")
+            }
         } else {
-            insert(issue)
+            print("No changes to context")
+        }
+    }
+    
+    func deleteExisting(issues: [JIRAIssue]) throws  {
+        let issueKeys = issues.map { (issue) -> String in
+            return issue.key
+        };
+        
+        let matchingRequest: NSFetchRequest<NSFetchRequestResult> = JiraIssueManagedObject.fetchRequest()
+        matchingRequest.predicate = NSPredicate(format: "key in %@", issueKeys)
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingRequest)
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        var deleteError: Error?
+        context.performAndWait {
+            do {
+                let batchDeleteResult = try context.execute(batchDeleteRequest) as? NSBatchDeleteResult
+                if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                    print("Deleted \(deletedObjectIDs.count) existing issues")
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+                                                        into: [self.context])
+                }
+            } catch {
+                print("Could not batch delete existing records")
+                print(error)
+                deleteError = error
+            }
+        }
+        
+        if let deleteError = deleteError {
+            throw deleteError
         }
     }
 }

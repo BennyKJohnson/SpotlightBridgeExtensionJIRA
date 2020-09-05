@@ -7,7 +7,7 @@
 //
 
 import SpotlightBridge
-import JIRAServices
+import JiraKit
 import Cocoa
 
 class SPBJIRASearchResult: SPBSearchResult {

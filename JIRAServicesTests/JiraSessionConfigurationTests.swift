@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import JIRAServices
+@testable import JiraKit
 
 class JiraSessionConfigurationTests: XCTestCase {
 

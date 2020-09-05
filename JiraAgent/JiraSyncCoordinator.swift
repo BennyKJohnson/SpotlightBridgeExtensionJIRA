@@ -7,45 +7,52 @@
 //
 
 import Foundation
+import JiraKit
+import os
 
-public class JiraManager {
+public class JiraSyncCoordinator {
     
     let dataStore: JiraStore
-    
-    let session: JiraSession
     
     var hasIssues: Bool = false
     
     var isSyncingIssues: Bool = false
     
+    let session: JiraSession
+    
+    var updateActivity: NSBackgroundActivityScheduler?
+    
+    var updateInterval: TimeInterval = 5 * 60
+    
     init(configuration: JiraSessionConfiguration, store: JiraStore) {
         self.dataStore = store
-        session = JiraSession(configuration: configuration)
+        self.hasIssues = true
+        self.session = JiraSession(configuration: configuration)
     }
     
     public convenience init(configuration: JiraSessionConfiguration) {
         self.init(configuration: configuration, store: JiraStore.defaultStore)
     }
     
-    
-    func save(issues: [JIRAIssue]) {
-        for issue in issues {
-            dataStore.createOrUpdate(issue: issue)
-        }
+    func setupBackgroundActivityScheduler(updateInterval: TimeInterval) -> NSBackgroundActivityScheduler {
+        let updateActivity = NSBackgroundActivityScheduler(identifier: "com.benjamin.jiraagent.updateissues")
+        updateActivity.repeats = true
+        updateActivity.interval = updateInterval
         
-        try! dataStore.save()
+        return updateActivity
+    }
+    
+    func scheduleUpdateActivity() {
+        os_log(.debug, "Scheduling background activity with interval %d", updateInterval);
+        updateActivity = setupBackgroundActivityScheduler(updateInterval: updateInterval)
+        updateActivity!.schedule { (completion) in
+            self.updateIssues {
+                completion(.finished)
+            }
+        }
     }
     
     public func queryIssues(userQueryString: String, completionHandler: @escaping ([JIRAIssue]) -> ()) {
-        if (!hasIssues && !isSyncingIssues) {
-                fetchIssues { (issues) in
-                    self.hasIssues = true
-                    self.queryIssuesFromDataStore(userQueryString: userQueryString, completionHandler: completionHandler)
-                }
-                return
-          //  }
-        }
-        
         self.queryIssuesFromDataStore(userQueryString: userQueryString, completionHandler: completionHandler)
     }
     
@@ -67,16 +74,17 @@ public class JiraManager {
         completionHandler(results)
     }
     
-    func fetchIssues(completionHandler: @escaping ([JIRAIssue]) -> ()) {
+    func updateIssues(completionHandler: @escaping () -> ()) {
+        print("Updating Issues")
         isSyncingIssues = true
         session.fetchIssues { (result) in
             switch result {
             case .success(let issues):
-                self.save(issues: issues)
+                self.dataStore.createOrUpdate(issues: issues)
                 print("Finished saving issues")
 
                 self.isSyncingIssues = false
-                completionHandler(issues)
+                completionHandler()
             case .failure(let error):
                 print("FAILED retrieving issues \(error)")
                 self.isSyncingIssues = false

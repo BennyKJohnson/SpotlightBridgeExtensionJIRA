@@ -7,8 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JIRAIssueViewController" customModule="JIRASpotlightBridgeExtension" customModuleProvider="target">
             <connections>
+                <outlet property="attributesView" destination="8N5-zi-0aK" id="vf8-Kp-Z9Y"/>
                 <outlet property="descriptionLabel" destination="nON-4R-urp" id="HYg-mT-YxK"/>
-                <outlet property="loggedTimeLabel" destination="V60-1Q-ai0" id="GNY-f7-kW7"/>
                 <outlet property="titleLabel" destination="1Ml-jG-MmN" id="PhT-e5-lle"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -31,9 +31,9 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nON-4R-urp">
-                    <rect key="frame" x="20" y="146" width="442" height="91"/>
+                    <rect key="frame" x="20" y="220" width="442" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="91" id="ggP-GP-ggX"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="itB-Ab-lHE"/>
                     </constraints>
                     <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="crD-f4-lol">
                         <font key="font" metaFont="system"/>
@@ -41,28 +41,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNU-he-EoV">
-                    <rect key="frame" x="20" y="104" width="84" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Logged Time" id="X0B-GL-RJm">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V60-1Q-ai0">
-                    <rect key="frame" x="115" y="104" width="60" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="1d 3h 5m" id="gbe-Ui-Udb">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8N5-zi-0aK">
+                    <rect key="frame" x="20" y="212" width="440" height="0.0"/>
+                </stackView>
             </subviews>
             <constraints>
+                <constraint firstItem="8N5-zi-0aK" firstAttribute="top" secondItem="nON-4R-urp" secondAttribute="bottom" constant="8" id="Cad-zM-doK"/>
                 <constraint firstItem="nON-4R-urp" firstAttribute="trailing" secondItem="1Ml-jG-MmN" secondAttribute="trailing" id="Day-T0-CxK"/>
                 <constraint firstAttribute="trailing" secondItem="1Ml-jG-MmN" secondAttribute="trailing" constant="20" symbolic="YES" id="bBD-m1-gmW"/>
+                <constraint firstItem="8N5-zi-0aK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="g7E-56-uLA"/>
+                <constraint firstAttribute="trailing" secondItem="8N5-zi-0aK" secondAttribute="trailing" constant="20" id="jg8-n8-RIu"/>
                 <constraint firstItem="1Ml-jG-MmN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="mOz-fp-PjK"/>
                 <constraint firstItem="nON-4R-urp" firstAttribute="top" secondItem="1Ml-jG-MmN" secondAttribute="bottom" constant="8" symbolic="YES" id="to6-6u-EA9"/>
                 <constraint firstItem="1Ml-jG-MmN" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="xQC-c6-eD4"/>

@@ -2,7 +2,7 @@
 //  JiraIssueManagedObject+CoreDataProperties.swift
 //  JIRAServices
 //
-//  Created by Benjamin Johnson on 25/8/20.
+//  Created by Benjamin Johnson on 30/8/20.
 //  Copyright © 2020 Benjamin Johnson. All rights reserved.
 //
 //
@@ -19,5 +19,9 @@ extension JiraIssueManagedObject {
 
     @NSManaged public var key: String?
     @NSManaged public var summary: String?
+    @NSManaged public var assigneeName: String?
+    @NSManaged public var issueDescription: String?
+    @NSManaged public var timespent: Int64
+    @NSManaged public var assigneeAvatarUrl: String?
 
 }

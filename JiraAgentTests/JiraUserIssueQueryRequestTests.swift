@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import JIRAServices
+
 class JiraUserIssueQueryRequestTests: XCTestCase {
 
     func testMakingUrlRequestForFetchingUserJiraIssues() throws

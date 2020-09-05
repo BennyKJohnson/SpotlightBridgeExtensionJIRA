@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="JiraIssueManagedObject" representedClassName=".JiraIssueManagedObject" syncable="YES">
+        <attribute name="assigneeAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="assigneeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="issueDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="key" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timespent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <fetchIndex name="byKeyIndex">
             <fetchIndexElement property="key" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <elements>
-        <element name="JiraIssueManagedObject" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="JiraIssueManagedObject" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import JiraKit
 
 struct JiraIssueQueryResponse: Decodable {
     let total: Int

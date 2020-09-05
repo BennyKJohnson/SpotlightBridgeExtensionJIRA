@@ -9,10 +9,10 @@
 import Foundation
 
 public struct JiraSessionConfiguration: Equatable {
-    let siteURL: URL
-    let username: String
-    let password: String
-    let apiVersion: String = "3"
+    public let siteURL: URL
+    public let username: String
+    public let password: String
+    public let apiVersion: String = "latest"
     
     public static func fromFile(for url: URL) -> JiraSessionConfiguration? {
         guard let jsonData = try? Data(contentsOf: url) else {

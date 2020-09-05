@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import JiraKit
 
 class JiraUserIssueQueryTask {
     
@@ -45,7 +46,7 @@ class JiraUserIssueQueryTask {
             return
         }
         
-        self.issues = self.issues ?? [] + response.issues
+        self.issues = self.issues! + response.issues
         if (response.hasPendingResults) {
             self.fetchRemainingIssues(startAt: response.startAt + response.maxResults)
         } else {

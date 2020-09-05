@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import JiraKit
 
 public class JiraSession: NSObject {
     
@@ -43,9 +44,5 @@ public class JiraSession: NSObject {
                 .appendingPathComponent("/rest/api")
                 .appendingPathComponent(configuration.apiVersion)
         }
-    }
-
-    func url(withPath path: String) -> URL {
-        return baseURL.appendingPathComponent(path)
     }
 }

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6FF7C54124F1CD3F00C471AD"
-               BuildableName = "JIRAServices.framework"
-               BlueprintName = "JIRAServices"
+               BuildableName = "JiraKit.framework"
+               BlueprintName = "JiraKit"
                ReferencedContainer = "container:JIRASpotlightBridgeExtension.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FF7C54124F1CD3F00C471AD"
-            BuildableName = "JIRAServices.framework"
-            BlueprintName = "JIRAServices"
+            BuildableName = "JiraKit.framework"
+            BlueprintName = "JiraKit"
             ReferencedContainer = "container:JIRASpotlightBridgeExtension.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FF7C54124F1CD3F00C471AD"
-            BuildableName = "JIRAServices.framework"
-            BlueprintName = "JIRAServices"
+            BuildableName = "JiraKit.framework"
+            BlueprintName = "JiraKit"
             ReferencedContainer = "container:JIRASpotlightBridgeExtension.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,8 +83,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FF7C54124F1CD3F00C471AD"
-            BuildableName = "JIRAServices.framework"
-            BlueprintName = "JIRAServices"
+            BuildableName = "JiraKit.framework"
+            BlueprintName = "JiraKit"
             ReferencedContainer = "container:JIRASpotlightBridgeExtension.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import JIRAServices
+import JiraKit
 
 class SPBJIRAQueryTests: XCTestCase {
 

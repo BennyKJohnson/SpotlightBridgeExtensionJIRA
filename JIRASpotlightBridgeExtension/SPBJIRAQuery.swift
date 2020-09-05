@@ -8,7 +8,7 @@
 
 import Foundation
 import SpotlightBridge
-import JIRAServices
+import JiraKit
 
 @objc public class SPBJIRAQuery: SPBQuery {
     

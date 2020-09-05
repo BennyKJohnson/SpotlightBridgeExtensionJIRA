@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import JIRAServices
+@testable import JiraKit
 
 class JiraStoreTests: XCTestCase {
     
@@ -133,27 +133,7 @@ class JiraStoreTests: XCTestCase {
         
         XCTAssertNil(dataStore.findIssue(key: "BOGUS"))
     }
-    
-    func testCreateOrUpdate() {
-        let originalIssueToUpdate = JIRAIssue(key: "UPDATE", title: "Original title", description: nil, timeSpent: nil)
-        dataStore.insert(originalIssueToUpdate)
-        
-        let modifiedIssue = JIRAIssue(key: "UPDATE", title: "Updated title", description: nil, timeSpent: nil)
-        dataStore.createOrUpdate(issue: modifiedIssue)
-        
-        let issuesAfterUpdate = dataStore.fetchAll()
-        XCTAssertEqual(issuesAfterUpdate.count, 1)
-        XCTAssertEqual(issuesAfterUpdate[0].title, "Updated title")
-        
-        let newIssue = jiraIssue(key: "NEW")
-        dataStore.createOrUpdate(issue: newIssue)
-        let issuesAfterCreateAndUpdate = dataStore.fetchAll()
-        
-        XCTAssertEqual(issuesAfterCreateAndUpdate.count, 2)
-        XCTAssertTrue(containsIssue(issue: modifiedIssue, issues: issuesAfterCreateAndUpdate))
-        XCTAssertTrue(containsIssue(issue: newIssue, issues: issuesAfterCreateAndUpdate))
-    }
-    
+     
     func containsIssue(issue: JIRAIssue, issues: [JIRAIssue]) -> Bool {
         return issues.first(where: { (aIssue) -> Bool in
             aIssue.key == issue.key

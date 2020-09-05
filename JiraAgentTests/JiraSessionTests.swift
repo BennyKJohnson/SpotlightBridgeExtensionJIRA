@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import JIRAServices
+@testable import JiraKit
 
 class JiraSessionTests: XCTestCase {
     var testConfiguration: JiraSessionConfiguration!
@@ -25,15 +25,6 @@ class JiraSessionTests: XCTestCase {
         let session = JiraSession(configuration: configuration)
         
         XCTAssertEqual(session.configuration, configuration)
-    }
-    
-    func testUrlWithPath() {
-        let siteURL = URL(string: "test.jira.com")!
-        let configuration = JiraSessionConfiguration(siteURL: siteURL, username: "username", password: "password")
-        let session = JiraSession(configuration: configuration)
-
-        let url = session.url(withPath: "issues")
-        XCTAssertEqual(url.absoluteString, "test.jira.com/rest/api/3/issues");
     }
     
     func testUrlSessionConfiguration() {

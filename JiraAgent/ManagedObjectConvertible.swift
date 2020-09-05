@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 
 /// An object that wants to be convertible in a managed object should implement the `ObjectConvertible` protocol.
