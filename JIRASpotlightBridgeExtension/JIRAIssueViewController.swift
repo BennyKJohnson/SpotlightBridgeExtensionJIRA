@@ -65,8 +65,10 @@ class JIRAIssueViewController: SPBPreviewController {
     
     func getAttributes(issue: JIRAIssue) -> [Attribute] {
         var attributes: [Attribute] = []
-        if let timeSpent = issue.timeSpent, let formattedTime = timeFormatter.string(from: timeSpent)  {
-            attributes.append(Attribute(key: "Logged Time", value: formattedTime))
+        
+        
+        if let status = issue.status {
+            attributes.append(Attribute(key: "Status", value: status , type: .status))
         }
         
         if let assignee = issue.assignee {
@@ -75,6 +77,10 @@ class JIRAIssueViewController: SPBPreviewController {
             } else {
                 attributes.append(Attribute(key: "Assignee", value: assignee.name))
             }
+        }
+        
+        if let timeSpent = issue.timeSpent, timeSpent > 0, let formattedTime = timeFormatter.string(from: timeSpent)  {
+            attributes.append(Attribute(key: "Logged Time", value: formattedTime))
         }
 
         return attributes
@@ -85,6 +91,8 @@ class JIRAIssueViewController: SPBPreviewController {
         labelTextField.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
         labelTextField.alignment = .right
         let valueTextField = NSTextField(labelWithString: attribute.value)
+        
+        print(attribute)
 
         var stackView: NSStackView
         switch attribute.type {
@@ -98,11 +106,39 @@ class JIRAIssueViewController: SPBPreviewController {
             
         case .text:
             stackView = NSStackView(views: [labelTextField, valueTextField])
+        case .status:
+            let statusLabel = setupStatusLabel(text: attribute.value)
+            stackView = NSStackView(views: [labelTextField, statusLabel])
         }
         
         stackView.orientation = .horizontal
         
         return stackView
+    }
+    
+    
+    func setupStatusLabel(text: String) -> NSTextField {
+        let statusLabel = JiraStatusLabel(labelWithString: text)
+        statusLabel.wantsLayer = true
+        statusLabel.textColor = NSColor.white
+        
+        let placeholderAttributes: [NSAttributedString.Key: AnyObject] = [
+            NSAttributedString.Key.foregroundColor: NSColor.white,
+            NSAttributedString.Key.baselineOffset: NSNumber(value: 4.0)
+        ]
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.minimumLineHeight = 24.0
+        paragraphStyle.maximumLineHeight = 24.0
+        
+        let placeholderAttributedString = NSMutableAttributedString(string: text, attributes: placeholderAttributes)
+        placeholderAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0,length: placeholderAttributedString.length))
+        statusLabel.attributedStringValue = placeholderAttributedString
+        
+        statusLabel.heightAnchor.constraint(equalToConstant: 30.0)
+        statusLabel.backgroundColor = NSColor.blue
+        statusLabel.alignment = .center
+        return statusLabel
     }
     
     func createAvartarView(avartar: NSImage) -> CircularImageView {

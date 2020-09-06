@@ -11,6 +11,7 @@ import Foundation
 enum AttributeType {
     case text
     case avartar(url: URL)
+    case status
 }
 
 struct Attribute {

@@ -26,7 +26,8 @@ class SPBJIRASearchResult: SPBSearchResult {
     }
     
     override func iconImageForApplication() -> NSImage {
-        return NSWorkspace.shared.icon(forFile: "/Applications/Safari.app")
+        let appURL = NSWorkspace.shared.urlForApplication(toOpen: URL(string: "https://jira.atlassian.com")!)
+        return NSWorkspace.shared.icon(forFile: appURL!.path)
     }
     
     override func isTopHit() -> Bool {
@@ -38,8 +39,8 @@ class SPBJIRASearchResult: SPBSearchResult {
     }
     
     override func open(withSearch searchString: String) -> Bool {
-        if let domain = issue.domain {
-            NSWorkspace.shared.open(URL(string: "https://\(domain)/browse/\(issue.key)")!)
+        if let url = issue.url {
+            NSWorkspace.shared.open(url)
         }
         
         return true

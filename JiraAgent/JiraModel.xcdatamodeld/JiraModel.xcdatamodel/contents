@@ -3,8 +3,10 @@
     <entity name="JiraIssueManagedObject" representedClassName=".JiraIssueManagedObject" syncable="YES">
         <attribute name="assigneeAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="assigneeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="domain" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="issueDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="key" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timespent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <fetchIndex name="byKeyIndex">
@@ -12,6 +14,6 @@
         </fetchIndex>
     </entity>
     <elements>
-        <element name="JiraIssueManagedObject" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="JiraIssueManagedObject" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>

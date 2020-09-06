@@ -30,21 +30,33 @@ import Foundation
         }
     }
     
-    public init(key: String, title: String, description: String?, timeSpent: TimeInterval?) {
+    public var status: String?
+    
+    public init(key: String, title: String, description: String?, timeSpent: TimeInterval?, domain: String?) {
         self.key = key
         self.title = title
         self.issueDescription = description
         self.timeSpent = timeSpent
-        self.domain = nil
+        self.domain = domain
     }
     
-    public init(identifier: String, key: String, title: String, description: String?, timeSpent: TimeInterval?) {
+    public init(identifier: String, key: String, title: String, description: String?, timeSpent: TimeInterval?, domain: String?) {
         self.identifier = identifier
         self.key = key
         self.title = title
         self.issueDescription = description
         self.timeSpent = timeSpent
-        self.domain = nil
+        self.domain = domain
+    }
+    
+    public var url: URL? {
+        get {
+            guard let domain = domain else {
+                return nil
+            }
+            
+            return URL(string: "https://\(domain)/browse/\(key)")
+        }
     }
 }
 
@@ -62,6 +74,11 @@ extension JIRAIssue {
         case description = "description"
         case avatarUrls = "avatarUrls"
         case largeAvatar = "48x48"
+        case status
+    }
+    
+    enum StatusJSONJeys: String, CodingKey {
+        case name
     }
     
     public convenience init(from decoder: Decoder) throws {
@@ -81,7 +98,17 @@ extension JIRAIssue {
         let timeSpent = try fields.decodeIfPresent(TimeInterval.self, forKey: .timeSpent)
         let description = try fields.decodeIfPresent(String.self, forKey: .description)
         
-        self.init(key: key, title: title, description: description, timeSpent: timeSpent)
+        let selfUrl = try root.decode(URL.self, forKey: .selfUrl)
+        let selfUrlComponents = URLComponents(url: selfUrl, resolvingAgainstBaseURL: false)
+        let domain = selfUrlComponents?.host
+        
+        self.init(key: key, title: title, description: description, timeSpent: timeSpent, domain: domain)
+        
+        if (fields.contains(.status)) {
+            let statusContainer = try fields.nestedContainer(keyedBy: StatusJSONJeys.self, forKey: .status)
+            let status = try statusContainer.decodeIfPresent(String.self, forKey: .name)
+            self.status = status
+        }
         
         if (fields.contains(.assignee)) {
             let assigneeContainer = try fields.nestedContainer(keyedBy: JSONKeys.self, forKey: .assignee)
@@ -105,6 +132,8 @@ extension JIRAIssue {
         case issueDescription
         case timeSpent
         case assignee
+        case domain
+        case status
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -114,6 +143,8 @@ extension JIRAIssue {
         try container.encode(key, forKey: .key)
         try container.encode(issueDescription, forKey: .issueDescription)
         try container.encode(timeSpent, forKey: .timeSpent)
+        try container.encode(domain, forKey: .domain)
+        try container.encode(status, forKey: .status)
         
         if let assignee = self.assignee {
             try container.encode(assignee, forKey: .assignee)
@@ -127,10 +158,13 @@ extension JIRAIssue {
         let description = try root.decodeIfPresent(String.self, forKey: .issueDescription)
         let timeSpent = try root.decode(TimeInterval.self, forKey: .timeSpent)
         let key = try root.decode(String.self, forKey: .key)
-        
-        self.init(key: key, title: title, description: description, timeSpent: timeSpent)
+        let domain = try root.decodeIfPresent(String.self, forKey: .domain)
+        self.init(key: key, title: title, description: description, timeSpent: timeSpent, domain: domain)
         
         let assignee = try root.decodeIfPresent(JiraAssignee.self, forKey: .assignee)
         self.assignee = assignee
+        
+        let status = try root.decodeIfPresent(String.self, forKey: .status)
+        self.status = status
     }
 }

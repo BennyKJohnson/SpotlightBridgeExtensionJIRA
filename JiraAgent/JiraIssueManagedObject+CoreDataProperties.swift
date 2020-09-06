@@ -23,5 +23,7 @@ extension JiraIssueManagedObject {
     @NSManaged public var issueDescription: String?
     @NSManaged public var timespent: Int64
     @NSManaged public var assigneeAvatarUrl: String?
+    @NSManaged public var domain: String?
+    @NSManaged public var status: String?
 
 }

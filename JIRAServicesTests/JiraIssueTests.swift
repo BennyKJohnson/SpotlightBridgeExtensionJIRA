@@ -20,19 +20,18 @@ class JiraIssueTests: XCTestCase {
 
     func testInternalEncode() throws {
         let encoder = JSONEncoder()
-        let issue = JIRAIssue(key: "Key-123", title: "My title", description: "My description", timeSpent: 60)
+        let issue = JIRAIssue(key: "Key-123", title: "My title", description: "My description", timeSpent: 60, domain: "test.jira.com")
         let data = try encoder.encode(issue)
         let string = String(data: data, encoding: .utf8)!
         
-        let expectedJSONString = "{\"title\":\"My title\",\"key\":\"Key-123\",\"issueDescription\":\"My description\",\"timeSpent\":60}"
+        let expectedJSONString = "{\"title\":\"My title\",\"key\":\"Key-123\",\"issueDescription\":\"My description\",\"timeSpent\":60,\"domain\":\"test.jira.com\"}"
         XCTAssertEqual(string, expectedJSONString)
-        print(string)
     }
     
     func testInternalDecode() throws {
         let decoder = JSONDecoder()
         decoder.context = DecodingContext()
-        let jsonString = "{\"title\":\"My title\",\"key\":\"Key-123\",\"issueDescription\":\"My description\",\"timeSpent\":60}"
+        let jsonString = "{\"title\":\"My title\",\"key\":\"Key-123\",\"issueDescription\":\"My description\",\"timeSpent\":60, \"domain\":\"test.jira.com\"}"
         let jsonData = jsonString.data(using: .utf8)!
         let issue = try decoder.decode(JIRAIssue.self, from: jsonData)
         
@@ -40,6 +39,7 @@ class JiraIssueTests: XCTestCase {
         XCTAssertEqual(issue.key, "Key-123")
         XCTAssertEqual(issue.issueDescription, "My description")
         XCTAssertEqual(issue.timeSpent, 60)
+        XCTAssertEqual(issue.domain, "test.jira.com")
         
     }
 

@@ -25,10 +25,13 @@ public class JiraIssueManagedObject: NSManagedObject, ManagedObjectConvertible {
         if let objectTimeSpent = object.timeSpent {
             timespent = Int64(objectTimeSpent)
         }
+        
+        domain = object.domain
+        status = object.status
     }
     
     func toObject() -> JIRAIssue {
-        let issue = JIRAIssue(identifier: self.identifier!, key: self.key!, title: self.summary ?? "", description:  issueDescription, timeSpent: Double(self.timespent))
+        let issue = JIRAIssue(identifier: self.identifier!, key: self.key!, title: self.summary ?? "", description:  issueDescription, timeSpent: Double(self.timespent), domain: self.domain)
         
         if let assigneeName = assigneeName {
             let url: URL?
@@ -39,6 +42,8 @@ public class JiraIssueManagedObject: NSManagedObject, ManagedObjectConvertible {
             }
             issue.assignee = JiraAssignee(name: assigneeName, avatarURL: url)
         }
+        
+        issue.status = status
         
         return issue
     }
