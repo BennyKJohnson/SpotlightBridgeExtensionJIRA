@@ -33,7 +33,7 @@ class JiraStoreTests: XCTestCase {
     }
     
     func testInsertJiraIssue() {
-        let issue = JIRAIssue(key: "ABC-123", title: "My issue", description: nil, timeSpent: nil)
+        let issue = JIRAIssue(key: "ABC-123", title: "My issue", description: nil, timeSpent: nil, domain: nil)
         dataStore.insert(issue)
 
         let request: NSFetchRequest<JiraIssueManagedObject> = JiraIssueManagedObject.fetchRequest()
@@ -45,7 +45,7 @@ class JiraStoreTests: XCTestCase {
     }
     
     func testDeleteJiraIssue() {
-        let issueToDelete = JIRAIssue(key: "DELETE-1", title: "Issue to delete", description: nil, timeSpent: nil)
+        let issueToDelete = JIRAIssue(key: "DELETE-1", title: "Issue to delete", description: nil, timeSpent: nil, domain: nil)
         dataStore.insert(issueToDelete)
         
         let request: NSFetchRequest<JiraIssueManagedObject> = JiraIssueManagedObject.fetchRequest()
@@ -60,10 +60,10 @@ class JiraStoreTests: XCTestCase {
     }
     
     func testUpdateJiraIssue() {
-        let issue = JIRAIssue(key: "ABC-123", title: "My issue", description: nil, timeSpent: nil)
+        let issue = JIRAIssue(key: "ABC-123", title: "My issue", description: nil, timeSpent: nil, domain: nil)
         let insertedIssue = dataStore.insert(issue)
         
-        let updatedIssue = JIRAIssue(identifier: insertedIssue!.identifier!, key: "ABC-123", title: "Updated issue title", description: nil, timeSpent: nil)
+        let updatedIssue = JIRAIssue(identifier: insertedIssue!.identifier!, key: "ABC-123", title: "Updated issue title", description: nil, timeSpent: nil, domain: nil)
         
         dataStore.update(updatedIssue)
         
@@ -89,9 +89,9 @@ class JiraStoreTests: XCTestCase {
     }
     
     func testFetch() {
-        let issueWithMatchingTitle = JIRAIssue(key: "1", title: "My issue", description: nil, timeSpent: nil)
-        let issueWithMatchingTitle2 = JIRAIssue(key: "2", title: "My issue", description: nil, timeSpent: nil)
-        let issueWithoutMatchingTitle = JIRAIssue(key: "3", title: "Another title", description: nil, timeSpent: nil)
+        let issueWithMatchingTitle = JIRAIssue(key: "1", title: "My issue", description: nil, timeSpent: nil, domain: nil)
+        let issueWithMatchingTitle2 = JIRAIssue(key: "2", title: "My issue", description: nil, timeSpent: nil, domain: nil)
+        let issueWithoutMatchingTitle = JIRAIssue(key: "3", title: "Another title", description: nil, timeSpent: nil, domain: nil)
         
         dataStore.insert(issueWithMatchingTitle)
         dataStore.insert(issueWithMatchingTitle2)
@@ -106,9 +106,9 @@ class JiraStoreTests: XCTestCase {
     }
     
     func testFetchWithSortDescriptor() {
-        let issueWithMatchingTitle = JIRAIssue(key: "Key-1", title: "My issue", description: nil, timeSpent: nil)
-        let issueWithMatchingTitle2 = JIRAIssue(key: "Key-2", title: "My issue", description: nil, timeSpent: nil)
-        let issueWithMatchingTitle3 = JIRAIssue(key: "Key-3", title: "My issue", description: nil, timeSpent: nil)
+        let issueWithMatchingTitle = JIRAIssue(key: "Key-1", title: "My issue", description: nil, timeSpent: nil, domain: nil)
+        let issueWithMatchingTitle2 = JIRAIssue(key: "Key-2", title: "My issue", description: nil, timeSpent: nil, domain: nil)
+        let issueWithMatchingTitle3 = JIRAIssue(key: "Key-3", title: "My issue", description: nil, timeSpent: nil, domain: nil)
         
         dataStore.insert(issueWithMatchingTitle3)
         dataStore.insert(issueWithMatchingTitle2)
@@ -133,7 +133,7 @@ class JiraStoreTests: XCTestCase {
         
         XCTAssertNil(dataStore.findIssue(key: "BOGUS"))
     }
-     
+    
     func containsIssue(issue: JIRAIssue, issues: [JIRAIssue]) -> Bool {
         return issues.first(where: { (aIssue) -> Bool in
             aIssue.key == issue.key
@@ -141,7 +141,7 @@ class JiraStoreTests: XCTestCase {
     }
     
     func jiraIssue(key: String) -> JIRAIssue {
-        return JIRAIssue(key: key, title: "My issue", description: nil, timeSpent: nil)
+        return JIRAIssue(key: key, title: "My issue", description: nil, timeSpent: nil, domain: nil)
     }
     
     func flushData() {

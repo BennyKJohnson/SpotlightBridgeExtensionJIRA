@@ -7,13 +7,22 @@
 //
 
 import Foundation
+import os
 
 protocol APIRequest {
+    
     associatedtype RequestDataType
+    
     associatedtype ResponseDataType
     
+    associatedtype ResponseErrorDataType: Error
+    
     func makeRequest(baseURL: URL, from data: RequestDataType) throws -> URLRequest
+    
     func parseResponse(data: Data) throws -> ResponseDataType
+    
+    func parseErrorResponse(data: Data) throws -> ResponseErrorDataType
+    
 }
 
 class APIRequestLoader<T: APIRequest> {
@@ -26,6 +35,8 @@ class APIRequestLoader<T: APIRequest> {
     
     var completionHandler:  ((T.ResponseDataType?, Error?) -> ())!
     
+    var dataTask: URLSessionDataTask?
+    
     init(apiRequest: T, urlSession: URLSession, baseURL: URL) {
         self.apiRequest = apiRequest
         self.urlSession = urlSession
@@ -37,10 +48,13 @@ class APIRequestLoader<T: APIRequest> {
         
         do {
             let urlRequest = try apiRequest.makeRequest(baseURL: baseURL, from: requestData)
+            os_log("Requesting %{public}s", urlRequest.url!.absoluteString)
             let dataTask = urlSession.dataTask(with: urlRequest, completionHandler: self.handleAPIResponse)
+            self.dataTask = dataTask
+            
             dataTask.resume()
         } catch {
-            return completionHandler(nil, error)
+            completionHandler(nil, error)
         }
     }
     
@@ -50,8 +64,15 @@ class APIRequestLoader<T: APIRequest> {
             let parsedResponse = try self.apiRequest.parseResponse(data: data)
             completionHandler(parsedResponse, nil)
         } catch {
-            completionHandler(nil, error)
+            if let errorMessage = try? self.apiRequest.parseErrorResponse(data: data) {
+                completionHandler(nil, errorMessage)
+            } else {
+                completionHandler(nil, error)
+            }
         }
     }
     
+    func cancel() {
+        self.dataTask?.cancel()
+    }
 }

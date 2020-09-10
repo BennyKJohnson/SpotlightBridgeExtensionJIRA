@@ -19,25 +19,48 @@ class JiraUserIssueQueryTask {
     
     var completionHandler:((Result<[JIRAIssue], Error>) -> ())?
     
-    init(urlSession: URLSession, baseURL: URL) {
+    let onlyUserAssignee: Bool
+    
+    var maxResults: Int?
+    
+    var issueKey: String?
+    
+    var query: String?
+    
+    var apiLoader: APIRequestLoader<JiraUserIssueQueryRequest>?
+    
+    init(urlSession: URLSession, baseURL: URL, onlyUserAssignee: Bool = false) {
         self.urlSession = urlSession
         self.baseURL = baseURL
+        self.onlyUserAssignee = onlyUserAssignee
     }
     
     func fetchIssues(completionHandler: @escaping (Result<[JIRAIssue], Error>) -> ()) {
         self.completionHandler = completionHandler
         self.issues = []
-        fetchRemainingIssues(startAt: 0)
+        
+        let requestParameters = makeRequestParameters(startAt: 0)
+        fetchRemainingIssues(requestParameters: requestParameters)
     }
     
-    func fetchRemainingIssues(startAt: Int) {
-        print("Fetching issues: \(startAt)")
+    func makeRequestParameters(startAt: Int) -> JiraUserIssueQueryRequestParameters {
+        var parameters = JiraUserIssueQueryRequestParameters(startAt: startAt, onlyUserAssignee: onlyUserAssignee)
+        parameters.maxResults = maxResults
+        parameters.query = query
         
+        return parameters
+    }
+    
+    func cancel() {
+        self.apiLoader?.cancel()
+    }
+    
+    func fetchRemainingIssues(requestParameters: JiraUserIssueQueryRequestParameters) {
         let request =  JiraUserIssueQueryRequest()
         let loader: APIRequestLoader<JiraUserIssueQueryRequest> = APIRequestLoader(apiRequest: request, urlSession: urlSession, baseURL: baseURL)
-        let parameters = JiraUserIssueQueryRequestParameters(startAt: startAt)
+        self.apiLoader = loader
         
-        loader.loadAPIRequest(requestData: parameters, completionHandler: self.handleResponse)
+        loader.loadAPIRequest(requestData: requestParameters, completionHandler: self.handleResponse)
     }
     
     func handleResponse(response: JiraIssueQueryResponse?, error: Error?) {
@@ -48,7 +71,9 @@ class JiraUserIssueQueryTask {
         
         self.issues = self.issues! + response.issues
         if (response.hasPendingResults) {
-            self.fetchRemainingIssues(startAt: response.startAt + response.maxResults)
+            let startAt = response.startAt + response.maxResults
+            let requestParameters = makeRequestParameters(startAt: startAt)
+            self.fetchRemainingIssues(requestParameters: requestParameters)
         } else {
             self.completionHandler!(Result.success(self.issues!))
         }

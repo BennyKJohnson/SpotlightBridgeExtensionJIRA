@@ -10,9 +10,13 @@ import Foundation
 import JiraKit
 
 struct JiraIssueQueryResponse: Decodable {
+    
     let total: Int
+    
     let startAt: Int
+    
     let maxResults: Int
+    
     let issues: [JIRAIssue]
     
     var hasPendingResults: Bool {
@@ -20,4 +24,12 @@ struct JiraIssueQueryResponse: Decodable {
                return self.startAt + self.maxResults < self.total
         }
     }
+}
+
+struct JiraErrorMessage: Decodable, Error {
+    
+    let errorMessages: [String]
+    
+    let warningMessages: [String]
+    
 }

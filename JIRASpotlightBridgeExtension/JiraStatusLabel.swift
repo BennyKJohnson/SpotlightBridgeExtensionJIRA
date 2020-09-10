@@ -8,6 +8,14 @@
 
 import Cocoa
 
-class JiraStatusLabel: NSTextView {
+class JiraStatusLabel: NSTextField {
+    
+    override func layout() {
+        super.layout()
+        
+        self.layer?.cornerRadius = 5
+        self.layer?.backgroundColor = NSColor.blue.cgColor
+        
 
+    }
 }

@@ -32,7 +32,7 @@ import Foundation
     
     public var status: String?
     
-    public init(key: String, title: String, description: String?, timeSpent: TimeInterval?, domain: String?) {
+    public init(key: String, title: String, description: String?, timeSpent: TimeInterval?, domain: String? = nil) {
         self.key = key
         self.title = title
         self.issueDescription = description
@@ -93,6 +93,7 @@ extension JIRAIssue {
         let root = try decoder.container(keyedBy: JSONKeys.self)
         
         let key = try root.decode(String.self, forKey: .key)
+        
         let fields = try root.nestedContainer(keyedBy: JSONKeys.self, forKey: .fields)
         let title = try fields.decode(String.self, forKey: .title)
         let timeSpent = try fields.decodeIfPresent(TimeInterval.self, forKey: .timeSpent)
@@ -156,7 +157,7 @@ extension JIRAIssue {
         
         let title = try root.decode(String.self, forKey: .title)
         let description = try root.decodeIfPresent(String.self, forKey: .issueDescription)
-        let timeSpent = try root.decode(TimeInterval.self, forKey: .timeSpent)
+        let timeSpent = try root.decodeIfPresent(TimeInterval.self, forKey: .timeSpent)
         let key = try root.decode(String.self, forKey: .key)
         let domain = try root.decodeIfPresent(String.self, forKey: .domain)
         self.init(key: key, title: title, description: description, timeSpent: timeSpent, domain: domain)

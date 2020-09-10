@@ -24,14 +24,16 @@ public class JiraSyncCoordinator {
     
     var updateInterval: TimeInterval = 5 * 60
     
-    init(configuration: JiraSessionConfiguration, store: JiraStore) {
+    var onlySyncUserAssignee: Bool = false
+    
+    init(session: JiraSession, store: JiraStore) {
         self.dataStore = store
         self.hasIssues = true
-        self.session = JiraSession(configuration: configuration)
+        self.session = session
     }
     
-    public convenience init(configuration: JiraSessionConfiguration) {
-        self.init(configuration: configuration, store: JiraStore.defaultStore)
+    public convenience init(session: JiraSession) {
+        self.init(session: session, store: JiraStore.defaultStore)
     }
     
     func setupBackgroundActivityScheduler(updateInterval: TimeInterval) -> NSBackgroundActivityScheduler {
@@ -46,42 +48,20 @@ public class JiraSyncCoordinator {
         os_log(.debug, "Scheduling background activity with interval %d", updateInterval);
         updateActivity = setupBackgroundActivityScheduler(updateInterval: updateInterval)
         updateActivity!.schedule { (completion) in
-            self.updateIssues {
+            self.updateIssues(onlyUserAssignee: self.onlySyncUserAssignee) {
                 completion(.finished)
             }
         }
     }
     
-    public func queryIssues(userQueryString: String, completionHandler: @escaping ([JIRAIssue]) -> ()) {
-        self.queryIssuesFromDataStore(userQueryString: userQueryString, completionHandler: completionHandler)
-    }
-    
-    func queryIssuesFromDataStore(userQueryString: String, completionHandler: @escaping ([JIRAIssue]) -> ()) {
-        if (userQueryString.isEmpty) {
-            completionHandler([])
-            return
-        }
-        
-        if (isSyncingIssues) {
-            print("Won't perform query because syncing issues")
-            completionHandler([])
-            return
-        }
-        
-        let keyPredicate = NSPredicate(format: "key CONTAINS[cd] %@", userQueryString)
-        let results = try! dataStore.fetch(predicate: keyPredicate, sortDescriptors: [NSSortDescriptor(key: "key", ascending: true)])
-        
-        completionHandler(results)
-    }
-    
-    func updateIssues(completionHandler: @escaping () -> ()) {
-        print("Updating Issues")
+    func updateIssues(onlyUserAssignee: Bool , completionHandler: @escaping () -> ()) {
+        os_log("Syncing issues from Jira")
         isSyncingIssues = true
-        session.fetchIssues { (result) in
+        session.fetchIssues(onlyUserAssignee: onlyUserAssignee) { (result) in
             switch result {
             case .success(let issues):
                 self.dataStore.createOrUpdate(issues: issues)
-                print("Finished saving issues")
+                os_log("Finished Syncing issues from Jira")
 
                 self.isSyncingIssues = false
                 completionHandler()

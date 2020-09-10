@@ -1,0 +1,34 @@
+{
+	"sections": [
+		{
+			"label": "History Search",
+			"sub": "Showing 1 of 1 matching issues",
+			"id": "hs",
+			"issues": [
+				{
+					"id": 100,
+					"key": "TEST-553",
+					"keyHtml": "TEST-<b>55</b>3",
+					"img": "/secure/viewavatar?size=medium&avatarId=100&avatarType=issuetype",
+					"summary": "Flag for removal",
+					"summaryText": "Flag for removal"
+				}
+			]
+		},
+		{
+			"label": "Current Search",
+			"sub": "Showing 1 of 1 matching issues",
+			"id": "cs",
+			"issues": [
+				{
+					"id": 600,
+					"key": "TEST-5",
+					"keyHtml": "TEST-<b>5</b>",
+					"img": "/secure/viewavatar?size=medium&avatarId=100&avatarType=issuetype",
+					"summary": "Insert records",
+					"summaryText": "Insert records"
+				}
+			]
+		}
+	]
+}

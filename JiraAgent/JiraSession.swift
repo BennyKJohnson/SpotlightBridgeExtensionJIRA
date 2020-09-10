@@ -16,6 +16,8 @@ public class JiraSession: NSObject {
     let urlSession: URLSession
     
     let userIssueQueryRequest: JiraUserIssueQueryRequest
+        
+    var issueSuggestionQueryTask: JiraIssueSuggestionQueryTask?
     
     public init(configuration: JiraSessionConfiguration) {
         self.configuration = configuration
@@ -33,9 +35,35 @@ public class JiraSession: NSObject {
         return urlSessionConfiguration
     }
     
-    public func fetchIssues(completionHandler: @escaping ((Result<[JIRAIssue], Error>) -> ())) {
-        let userIssueQueryTask = JiraUserIssueQueryTask(urlSession: self.urlSession, baseURL: baseURL)
+    public func fetchIssues(onlyUserAssignee: Bool, completionHandler: @escaping ((Result<[JIRAIssue], Error>) -> ())) {
+        let userIssueQueryTask = JiraUserIssueQueryTask(urlSession: self.urlSession, baseURL: baseURL, onlyUserAssignee: onlyUserAssignee)
         userIssueQueryTask.fetchIssues(completionHandler: completionHandler)
+    }
+    
+    public func queryIssueSuggestions(query: String,  completionHandler: @escaping ((Result<[JIRAIssue], Error>) -> ())) {
+        if let issueSuggestionQueryTask = issueSuggestionQueryTask {
+            issueSuggestionQueryTask.cancel()
+        }
+        
+        let issueSuggestionQueryTask = JiraIssueSuggestionQueryTask(urlSession: self.urlSession, baseURL: baseURL)
+        self.issueSuggestionQueryTask = issueSuggestionQueryTask
+        
+        issueSuggestionQueryTask.fetchIssueSuggestions(query: query, completionHandler: completionHandler);
+    }
+    
+    public func fetchIssueDetails(issueKey: String, completionHandler: @escaping (Result<JIRAIssue, Error>) -> ()) {
+        let fetchIssueTask = JiraUserIssueQueryTask(urlSession: self.urlSession, baseURL: baseURL, onlyUserAssignee: false)
+        fetchIssueTask.query = issueKey
+        
+        fetchIssueTask.fetchIssues { (result) in
+            switch result {
+            case .failure(let failure):
+                completionHandler(Result.failure(failure))
+            case .success(let results):
+                let result = results[0]
+                completionHandler(Result.success(result))
+            }
+        }
     }
 
     var baseURL: URL {

@@ -11,5 +11,7 @@ import Foundation
 @objc public protocol JiraServiceProtocol {
 
     func queryIssues(userQueryString: String, completionHandler: @escaping ([Data]?, Error?) -> ())
+    
+    func fetchIssueDetails(issueKey: String, completionHandler: @escaping (Data?, Error?) -> ())
 
 }

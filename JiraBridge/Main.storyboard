@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="OMX-rO-6DS">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!-- Jira Bridge Preferences-->
+        <scene sceneID="BZv-56-HXJ">
+            <objects>
+                <viewController title=" Jira Bridge Preferences" id="OMX-rO-6DS" customClass="JiraBridgePreferencesViewController" customModule="JiraBridge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="eWd-EN-xu1">
+                        <rect key="frame" x="0.0" y="0.0" width="709" height="356"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVI-TC-4lq">
+                                <rect key="frame" x="219" y="296" width="272" height="40"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8eD-z8-FvG">
+                                        <rect key="frame" x="-2" y="23" width="84" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Issue results:" id="3Wv-oP-IQw">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gd4-ct-Qpb">
+                                        <rect key="frame" x="88" y="0.0" width="184" height="40"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ofY-qu-gbB">
+                                                <rect key="frame" x="-1" y="23" width="79" height="18"/>
+                                                <buttonCell key="cell" type="radio" title="All issues" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="2RZ-OG-9RS">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="issueResultsRadioButtonChanged:" target="OMX-rO-6DS" id="y6p-7z-Kx2"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DN6-t2-DWu">
+                                                <rect key="frame" x="-1" y="-1" width="187" height="18"/>
+                                                <buttonCell key="cell" type="radio" title="Only issues assigned to me" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="BYh-Kr-AxT">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="issueResultsRadioButtonChanged:" target="OMX-rO-6DS" id="3SZ-c6-gS0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bVI-TC-4lq" firstAttribute="centerX" secondItem="eWd-EN-xu1" secondAttribute="centerX" id="P01-V7-49m"/>
+                            <constraint firstItem="bVI-TC-4lq" firstAttribute="top" secondItem="eWd-EN-xu1" secondAttribute="top" constant="20" id="Piv-YI-tso"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="issueResultsPreferenceAllButton" destination="ofY-qu-gbB" id="ePq-hA-KD6"/>
+                        <outlet property="issueResultsPreferenceAssignedIssuesButton" destination="DN6-t2-DWu" id="ozw-Kk-wkG"/>
+                    </connections>
+                </viewController>
+                <customObject id="x1a-5S-9Cv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="157.5" y="87"/>
+        </scene>
+    </scenes>
+</document>

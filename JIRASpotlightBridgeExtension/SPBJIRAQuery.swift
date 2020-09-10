@@ -12,19 +12,23 @@ import JiraKit
 
 @objc public class SPBJIRAQuery: SPBQuery {
     
+    var completionHandler:((SPBResponse?) -> Void)?
+    
     public override func perform(_ userQueryString: String!, withCompletionHandler completionHandler: ((SPBResponse?) -> Void)!) {
-        SPBJiraManager.shared.findMatchingIssues(for: userQueryString) { (issues) in
-            
-            let rankedIssues = self.rankIssues(userQueryString: userQueryString, issues: issues)
-            let results = self.searchResults(for: rankedIssues)
-            
-            if (results.isEmpty) {
-                completionHandler(nil)
-                return
-            }
-
-            completionHandler(self.response(for: results))
+        self.completionHandler = completionHandler
+        SPBJiraManager.shared.findMatchingIssues(for: userQueryString, completionHandler: self.handleResponse)
+    }
+    
+    func handleResponse(issues: [JIRAIssue]) {
+        let rankedIssues = self.rankIssues(userQueryString: userQueryString, issues: issues)
+        let results = self.searchResults(for: rankedIssues)
+        
+        if (results.isEmpty) {
+            completionHandler!(nil)
+            return
         }
+        
+        completionHandler!(self.response(for: results))
     }
     
     func rankIssues(userQueryString:String, issues: [JIRAIssue]) -> [JIRAIssue] {
@@ -61,7 +65,7 @@ import JiraKit
     
     func searchResults(for issues: [JIRAIssue]) -> [SPBJIRASearchResult] {
         return issues.map { (issue) -> SPBJIRASearchResult in
-            return SPBJIRASearchResult(issue: issue)
+            return SPBJIRASearchResult(issue: issue, issueUpdater: SPBJiraManager.shared)
         }
     }
 }

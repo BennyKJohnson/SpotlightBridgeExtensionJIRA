@@ -24,6 +24,8 @@ class JIRAIssueViewController: SPBPreviewController {
     
     let timeFormatter: DateComponentsFormatter
     
+    var searchResult: SPBJIRASearchResult?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -45,9 +47,25 @@ class JIRAIssueViewController: SPBPreviewController {
     }
     
     override func display(_ result: SPBSearchResult) {
-        let issueSearchResult = result as! SPBJIRASearchResult
-        let issue = issueSearchResult.issue
+        clearPreviousSearchResultDelegate()
         
+        let issueSearchResult = result as! SPBJIRASearchResult
+        issueSearchResult.resultUpdaterDelegate = self
+        
+        display(issue: issueSearchResult.issue)
+    
+        if !issueSearchResult.hasCompleteIssue {
+            issueSearchResult.fetchIssueDetails()
+        }
+    }
+    
+    func clearPreviousSearchResultDelegate() {
+        if let searchResult = searchResult {
+            searchResult.resultUpdaterDelegate = nil
+        }
+    }
+    
+    func display(issue: JIRAIssue) {
         self.titleLabel.stringValue = issue.title
         self.descriptionLabel.stringValue = issue.issueDescription ?? ""
         
@@ -79,9 +97,13 @@ class JIRAIssueViewController: SPBPreviewController {
             }
         }
         
-        if let timeSpent = issue.timeSpent, timeSpent > 0, let formattedTime = timeFormatter.string(from: timeSpent)  {
+        if let timeSpent = issue.timeSpent, timeSpent > 0, var formattedTime = timeFormatter.string(from: timeSpent)  {
+            // Remove trailing period if present, not sure if this is a bug or poor configuration of the time formatter
+            if let lastChar = formattedTime.last, lastChar == "." {
+                formattedTime.removeLast()
+            }
             attributes.append(Attribute(key: "Logged Time", value: formattedTime))
-        }
+        }        
 
         return attributes
     }
@@ -92,8 +114,6 @@ class JIRAIssueViewController: SPBPreviewController {
         labelTextField.alignment = .right
         let valueTextField = NSTextField(labelWithString: attribute.value)
         
-        print(attribute)
-
         var stackView: NSStackView
         switch attribute.type {
         case .avartar(let url):
@@ -148,4 +168,14 @@ class JIRAIssueViewController: SPBPreviewController {
         
         return avartarView
     }
+}
+
+extension JIRAIssueViewController: SPBJiraSearchResultUpdaterDelegate {
+    
+    func didUpdateResult(searchResult: SPBJIRASearchResult) {
+        DispatchQueue.main.async {
+            self.display(issue: searchResult.issue)
+        }
+    }
+
 }

@@ -9,10 +9,16 @@
 import Foundation
 import JiraKit
 
-class SPBJiraManager {
+protocol SPBJiraIssueUpdater {
+    
+    func fetchIssueDetails(issue: JIRAIssue, completionHandler: @escaping (JIRAIssue?) -> ())
+    
+}
+
+class SPBJiraManager: SPBJiraIssueUpdater {
     
     static let shared = SPBJiraManager.defaultManager()
-    
+        
     let connection: NSXPCConnection
     
     var service: JiraServiceProtocol!
@@ -23,7 +29,9 @@ class SPBJiraManager {
         }
         
         let configuration = JiraSessionConfiguration.fromFile(for: configurationURL)!
-        return SPBJiraManager(configuation: configuration)
+        let manager = SPBJiraManager(configuation: configuration)
+        
+        return manager
     }
     
     init(configuation: JiraSessionConfiguration) {
@@ -67,6 +75,25 @@ class SPBJiraManager {
                 print("Something went wrong querying issues \(error)")
             }
             
+        }
+    }
+    
+    func fetchIssueDetails(issue: JIRAIssue, completionHandler: @escaping (JIRAIssue?) -> ()) {
+        if service == nil {
+            setupConnection()
+        }
+        
+        service.fetchIssueDetails(issueKey: issue.key) { (issueData, error) in
+            if let issueData = issueData {
+                let decoder = JSONDecoder()
+                decoder.context = DecodingContext()
+                
+                let issue = try! decoder.decode(JIRAIssue.self, from: issueData)
+                completionHandler(issue)
+            } else if let error = error {
+                print(error)
+                completionHandler(nil)
+            }
         }
     }
 }

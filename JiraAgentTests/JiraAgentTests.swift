@@ -7,27 +7,43 @@
 //
 
 import XCTest
+@testable import JiraKit
 
 class JiraAgentTests: XCTestCase {
-
+    
+    let configuration = JiraSessionConfiguration(siteURL: URL(string: "http://test.jira.com")!, username: "username", password: "password")
+    
+    var dataStore: JiraStore!
+    
+    var agent: JiraAgent!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let coreDataManager = CoreDataManager.shared        
+        dataStore = JiraStore(container: coreDataManager.mockPersistantContainer)
+        agent = JiraAgent(configuration: configuration, dataStore: dataStore)
+    }
+    
+    func testInit() {
+        let newAgent = JiraAgent(configuration: configuration, dataStore: dataStore)
+
+        XCTAssertNotNil(newAgent)
+        XCTAssertNotNil(newAgent.session)
+        XCTAssertNotNil(newAgent.preferences)
+        XCTAssertNotNil(newAgent.syncCoordinator)
+        XCTAssertEqual(newAgent.syncCoordinator.session, newAgent.session)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testSetupListener() {
+        agent.setupListener()
+        XCTAssertNotNil(agent.listener)
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testListenerShouldAcceptNewConnection() {
+        agent.setupListener()
+        let newConnection = NSXPCConnection(machServiceName: "Test", options: [])
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        let result = agent.listener(agent.listener!, shouldAcceptNewConnection: newConnection)
+        XCTAssertTrue(result)
     }
 
 }

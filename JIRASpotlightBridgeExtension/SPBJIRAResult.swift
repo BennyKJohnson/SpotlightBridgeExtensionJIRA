@@ -10,13 +10,25 @@ import SpotlightBridge
 import JiraKit
 import Cocoa
 
+protocol SPBJiraSearchResultUpdaterDelegate {
+    
+    func didUpdateResult(searchResult: SPBJIRASearchResult)
+}
+
 class SPBJIRASearchResult: SPBSearchResult {
     public var topHit: Bool = false
     
-    let issue: JIRAIssue
+    var issue: JIRAIssue
     
-    init(issue: JIRAIssue) {
+    let issueUpdater: SPBJiraIssueUpdater
+    
+    var hasCompleteIssue: Bool = false
+    
+    var resultUpdaterDelegate: SPBJiraSearchResultUpdaterDelegate?
+    
+    init(issue: JIRAIssue, issueUpdater: SPBJiraIssueUpdater) {
         self.issue = issue
+        self.issueUpdater = issueUpdater
 
         super.init(displayName: issue.key)
     }
@@ -48,5 +60,19 @@ class SPBJIRASearchResult: SPBSearchResult {
     
     override func previewViewController() -> NSViewController {
         return JIRAIssueViewController.shared
+    }
+    
+    func fetchIssueDetails() {
+        self.issueUpdater.fetchIssueDetails(issue: issue) { (issue) in
+            guard let issue = issue else {
+                self.hasCompleteIssue = true
+                return
+            }
+            
+            self.issue = issue
+            self.hasCompleteIssue = true
+            
+            self.resultUpdaterDelegate?.didUpdateResult(searchResult: self)
+        }
     }
 }
